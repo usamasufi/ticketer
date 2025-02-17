@@ -34,9 +34,9 @@ migrate_working_dir/
 /macos/
 /linux/
 /web/
-lib/mainnnn.dart
-/lib/nav_bar/nnan.dart
-/lib/screens/home/hotel_detailsssss.dart
+/mainnnn.dart
+nav_bar/nnan.dart
+screens/home/hotel_detailsssss.dart
 
 # Symbolication related
 app.*.symbols
