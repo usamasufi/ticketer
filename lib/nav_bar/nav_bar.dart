@@ -21,7 +21,6 @@ class NavBar extends StatelessWidget {
     const ProfileScreen()
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Obx((){

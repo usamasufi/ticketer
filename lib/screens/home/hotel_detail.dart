@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ticketer/controller/text_expansion_controller.dart';
 import 'package:ticketer/reuseable/app_styles.dart';
 import 'package:ticketer/utils/all_json.dart';
 
@@ -86,8 +88,7 @@ class _HotelDetailState extends State<HotelDetail> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ExpandedTextWidget(
-                text:
-                hotelsList[index]['detail'],
+                text: hotelsList[index]['detail'],
               ),
             ),
             Padding(
@@ -118,42 +119,38 @@ class _HotelDetailState extends State<HotelDetail> {
   }
 }
 
-class ExpandedTextWidget extends StatefulWidget {
+class ExpandedTextWidget extends StatelessWidget {
   final String text;
-  const ExpandedTextWidget({super.key, required this.text});
 
-  @override
-  State<ExpandedTextWidget> createState() => _ExpandedTextWidgetState();
-}
+  ExpandedTextWidget({super.key, required this.text});
 
-class _ExpandedTextWidgetState extends State<ExpandedTextWidget> {
-  bool isExpanded = false;
-  _toggleExpension() {
-    setState(() {
-      isExpanded = !isExpanded;
-    });
-  }
+  final TextExpansionController controller = Get.put(TextExpansionController());
 
   @override
   Widget build(BuildContext context) {
 
-
-    var textWidget = Text(
-      widget.text,
-      maxLines: isExpanded?null:9,
-      overflow: isExpanded?TextOverflow.visible:TextOverflow.ellipsis,
-    );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        textWidget,
-        GestureDetector(
-          onTap: () {
-            _toggleExpension();
-          },
-          child: Text(isExpanded?'Less':'More', style: AppStyles.textStyle.copyWith(color: AppStyles.primaryColor)),),
-
-      ],
-    );
+    return Obx((){
+      var textWidget = Text(
+        text,
+        maxLines: controller.isExpanded.value ? null : 9,
+        overflow: controller.isExpanded.value
+            ? TextOverflow.visible
+            : TextOverflow.ellipsis,
+      );
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          textWidget,
+          GestureDetector(
+            onTap: () {
+              controller.toggleExpansion();
+            },
+            child: Text(controller.isExpanded.value ? 'Less' : 'More',
+                style:
+                AppStyles.textStyle.copyWith(color: AppStyles.primaryColor)),
+          ),
+        ],
+      );
+    });
   }
 }

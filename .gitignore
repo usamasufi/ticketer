@@ -30,6 +30,13 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+/windows/
+/macos/
+/linux/
+/web/
+/lib/mainnnn.dart
+/lib/nav_bar/nnan.dart
+/lib/screens/home/hotel_detailsssss.dart
 
 # Symbolication related
 app.*.symbols
